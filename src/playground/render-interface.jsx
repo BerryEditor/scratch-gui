@@ -49,7 +49,7 @@ import styles from './interface.css';
 
 if (window.parent !== window) {
     // eslint-disable-next-line no-alert
-    alert('This page is embedding TurboWarp in a way that is unsupported and will cease to function in the near future. Please read https://docs.turbowarp.org/embedding');
+    alert('This page is embedding TinyPatch in a way that is unsupported and will cease to function in the near future.');
     throw new Error('Invalid embed');
 }
 
@@ -98,8 +98,8 @@ const Footer = () => (
             <div className={styles.footerText}>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="TurboWarp is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation."
-                    description="Disclaimer that TurboWarp is not connected to Scratch"
+                    defaultMessage="TinyPatch is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation."
+                    description="Disclaimer that TinyPatch is not connected to Scratch"
                     id="tw.footer.disclaimer"
                 />
             </div>
@@ -112,24 +112,17 @@ const Footer = () => (
                             id="tw.footer.credits"
                         />
                     </a>
-                    <a href="https://github.com/sponsors/GarboMuffin">
-                        <FormattedMessage
-                            defaultMessage="Donate"
-                            description="Donation link in footer"
-                            id="tw.footer.donate"
-                        />
-                    </a>
                 </div>
                 <div className={styles.footerSection}>
-                    <a href="https://desktop.turbowarp.org/">
+                    <a href="https://github.com/TinyPatch/desktop">
                         {/* Do not translate */}
-                        {'TurboWarp Desktop'}
+                        {'TinyPatch Desktop'}
                     </a>
-                    <a href="https://packager.turbowarp.org/">
+                    <a href="https://github.com/TinyPatch/packager">
                         {/* Do not translate */}
-                        {'TurboWarp Packager'}
+                        {'TinyPatch Packager'}
                     </a>
-                    <a href="https://docs.turbowarp.org/embedding">
+                    {/* <a href="https://docs.turbowarp.org/embedding">
                         <FormattedMessage
                             defaultMessage="Embedding"
                             description="Menu bar item for embedding link"
@@ -145,21 +138,21 @@ const Footer = () => (
                     </a>
                     <a href="https://docs.turbowarp.org/translate">
                         <FormattedMessage
-                            defaultMessage="Help Translate TurboWarp"
-                            description="Menu bar item for translating TurboWarp link"
+                            defaultMessage="Help Translate TinyPatch"
+                            description="Menu bar item for translating TinyPatch link"
                             id="tw.footer.translate"
                         />
-                    </a>
+                    </a> */}
                 </div>
                 <div className={styles.footerSection}>
-                    <a href="https://scratch.mit.edu/users/GarboMuffin/#comments">
+                    <a href="https://github.com/TinyPatch/desktop/issues">
                         <FormattedMessage
                             defaultMessage="Feedback & Bugs"
                             description="Link to feedback/bugs page"
                             id="tw.feedback"
                         />
                     </a>
-                    <a href="https://github.com/TurboWarp/">
+                    <a href="https://github.com/TinyPatch/">
                         <FormattedMessage
                             defaultMessage="Source Code"
                             description="Link to source code"
@@ -191,9 +184,9 @@ class Interface extends React.Component {
     }
     handleUpdateProjectTitle (title, isDefault) {
         if (isDefault || !title) {
-            document.title = `TurboWarp - ${this.props.intl.formatMessage(messages.defaultTitle)}`;
+            document.title = `TinyPatch - ${this.props.intl.formatMessage(messages.defaultTitle)}`;
         } else {
-            document.title = `${title} - TurboWarp`;
+            document.title = `${title} - TinyPatch`;
         }
     }
     render () {
@@ -234,7 +227,8 @@ class Interface extends React.Component {
                 <div
                     className={styles.center}
                     style={isPlayerOnly ? ({
-                        // add a couple pixels to account for border (TODO: remove weird hack)
+                        // eslint-disable-next-line no-warning-comments
+                        // TODO: add a couple pixels to account for border
                         width: `${Math.max(480, props.customStageSize.width) + 2}px`
                     }) : null}
                 >
@@ -258,7 +252,7 @@ class Interface extends React.Component {
                             <div className={styles.section}>
                                 <ProjectInput />
                             </div>
-                            {(
+                            {/* {(
                                 // eslint-disable-next-line max-len
                                 description.instructions === 'unshared' || description.credits === 'unshared'
                             ) && (
@@ -290,8 +284,9 @@ class Interface extends React.Component {
                                     </p>
                                     <p>
                                         <FormattedMessage
-                                            // eslint-disable-next-line max-len
-                                            defaultMessage="If the project was shared recently, this message may appear incorrectly for a few minutes."
+                                        */
+                                // eslint-disable-next-line max-len
+                                /*       defaultMessage="If the project was shared recently, this message may appear incorrectly for a few minutes."
                                             description="Appears on unshared projects"
                                             id="tw.unshared.cache"
                                         />
@@ -305,7 +300,7 @@ class Interface extends React.Component {
                                         />
                                     </p>
                                 </div>
-                            )}
+                            )} */}
                             {hasCloudVariables && projectId !== '0' && (
                                 <div className={styles.section}>
                                     <CloudVariableBadge />
@@ -324,8 +319,8 @@ class Interface extends React.Component {
                                 <p>
                                     <FormattedMessage
                                         // eslint-disable-next-line max-len
-                                        defaultMessage="TurboWarp is a Scratch mod that compiles projects to JavaScript to make them run really fast. Try it out by inputting a project ID or URL above or choosing a featured project below."
-                                        description="Description of TurboWarp"
+                                        defaultMessage="TinyPatch is a Scratch mod that compiles projects to JavaScript to make them run really fast. Try it out by inputting a project ID or URL above or choosing a featured project below."
+                                        description="Description of TinyPatch"
                                         id="tw.home.description"
                                     />
                                 </p>

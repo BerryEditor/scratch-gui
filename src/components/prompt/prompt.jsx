@@ -146,12 +146,12 @@ const PromptComponent = props => (
                         values={{
                             packager: (
                                 <a
-                                    href="https://packager.turbowarp.org"
+                                    href="https://github.com/TinyPatch/packager"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
                                     {/* Should not be translated */}
-                                    {'TurboWarp Packager'}
+                                    {'TinyPatch Packager'}
                                 </a>
                             )
                         }}

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import log from './log';
 import {getIsShowingProject} from '../reducers/project-state';
 
+// TODO: needs url change (PACKAGER)
 const PACKAGER = 'https://packager.turbowarp.org';
 
 const readBlobAsArrayBuffer = blob => new Promise((resolve, reject) => {

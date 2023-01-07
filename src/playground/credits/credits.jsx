@@ -5,7 +5,7 @@ import appTarget from '../app-target';
 import styles from './credits.css';
 import {getInitialDarkMode} from '../../lib/tw-theme-hoc.jsx';
 
-import UserData from './users';
+//  import UserData from './users';
 
 /* eslint-disable react/jsx-no-literals */
 
@@ -53,44 +53,36 @@ const Credits = () => (
     <main className={styles.main}>
         <header className={styles.headerContainer}>
             <h1 className={styles.headerText}>
-                TurboWarp Credits
+                TinyPatch Credits
             </h1>
         </header>
         <section>
             <p>
-                The TurboWarp project is made possible by the work of many volunteers.
+                The TinyPatch project is made possible by the work of a volunteer.
             </p>
         </section>
         <section>
             <h2>Scratch</h2>
             <p>
-                TurboWarp is based on the work of the <a href="https://scratch.mit.edu/credits">Scratch contributors</a> but is not endorsed by Scratch in any way.
+                TinyPatch is based on the work of TurboWarp <a href="https://turbowarp.org/credits"> and Scratch </a><a href="https://scratch.mit.edu/credits">Scratch contributors</a> but is not endorsed by Scratch in any way.
             </p>
             <p>
                 <a href="https://scratch.mit.edu/donate">
                     Donate to support Scratch.
                 </a>
+                <a href="https://turbowarp.org/donate">
+                    Donate to support TurboWarp.
+                </a>
             </p>
         </section>
-        <section>
-            <h2>Addons</h2>
-            <UserList users={UserData.addonDevelopers} />
-        </section>
-        <section>
-            <h2>Translators</h2>
-            <p>
-                More than 100 people have helped translate TurboWarp and its addons into many languages
-                &mdash; far more than we could hope to list here.
-            </p>
-        </section>
-        <section>
+        {/* <section>
             <p>
                 <i>
                     Individual contributors are listed in no particular order.
                     The order is randomized each visit.
                 </i>
             </p>
-        </section>
+        </section> */}
     </main>
 );
 

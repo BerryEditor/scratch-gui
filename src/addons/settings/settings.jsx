@@ -1,19 +1,3 @@
-/**
- * Copyright (C) 2021 Thomas Weber
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as
- * published by the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -55,7 +39,7 @@ if (locale !== 'en') {
     }
 }
 
-document.title = `${settingsTranslations.title} - TurboWarp`;
+document.title = `${settingsTranslations.title} - TinyPatch`;
 
 const theme = getInitialDarkMode() ? 'dark' : 'light';
 document.body.setAttribute('theme', theme);
@@ -575,14 +559,16 @@ const Addon = ({
                 <div className={styles.description}>
                     {addonTranslations[`${id}/@description`] || manifest.description}
                 </div>
-                {manifest.credits && (
+                {
+                // NOTE: Enable Credits
+                /* {manifest.credits && (
                     <div className={styles.creditContainer}>
                         <span className={styles.creditTitle}>
                             {settingsTranslations.credits}
                         </span>
                         <CreditList credits={manifest.credits} />
                     </div>
-                )}
+                )} */}
                 {manifest.info && (
                     manifest.info.map(info => (
                         <Notice
@@ -1040,7 +1026,7 @@ class AddonSettingsComponent extends React.Component {
                             />
                         </div>
                         <a
-                            href="https://scratch.mit.edu/users/GarboMuffin/#comments"
+                            href="https://github.com/obaydmerz"
                             target="_blank"
                             rel="noreferrer"
                             className={styles.feedbackButtonOuter}
