@@ -14,9 +14,11 @@ const CloudVariableBadge = () => (
             />
         </div>
         <div className={styles.text}>
-            <FormattedMessage
+            {
+            // NOTE: cloud-variable-badge
+            /* <FormattedMessage
                 // eslint-disable-next-line max-len
-                defaultMessage="This project uses cloud variables. TurboWarp uses its own cloud variable server independent of Scratch. Beware of impersonation as anyone can change their username to anything. {learnMore}"
+                defaultMessage="This project uses cloud variables. TinyPatch uses its own cloud variable server independent of Scratch. Beware of impersonation as anyone can change their username to anything. {learnMore}"
                 description="Cloud variable information shown under projects with cloud variables"
                 id="tw.cloudVariableBadge"
                 values={{
@@ -33,7 +35,7 @@ const CloudVariableBadge = () => (
                         </a>
                     )
                 }}
-            />
+            /> */}
         </div>
     </div>
 );

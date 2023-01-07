@@ -325,7 +325,7 @@ export default [
     {
         name: (
             <FormattedMessage
-                defaultMessage="TurboWarp Blocks"
+                defaultMessage="TinyPatch Blocks"
                 description="Name of TW extension"
                 id="tw.twExtension.name"
             />
