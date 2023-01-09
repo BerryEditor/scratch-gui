@@ -25,7 +25,7 @@ const manifest = {
     },
     {
       "type": "warning",
-      "text": "The \"TinyPatch keys\" will only work in TinyPatch, not in Scratch.",
+      "text": "The \"TurboWarp keys\" will only work in TurboWarp, not in Scratch.",
       "id": "twKeysWarn"
     }
   ],
@@ -46,7 +46,7 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Show TinyPatch keys",
+      "name": "Show TurboWarp keys",
       "id": "twKeys",
       "type": "boolean",
       "default": false

@@ -86,7 +86,7 @@ export default async function ({ addon, console, msg }) {
   GamepadLib.setConsole(console);
   const gamepad = new GamepadLib();
 
-  gamepad.getHintsLazily = () => {
+  gamepad.getUserHints = () => {
     const parsedOptions = parseOptionsComment();
     if (parsedOptions) {
       return {
@@ -349,7 +349,7 @@ export default async function ({ addon, console, msg }) {
   });
 
   let getCanvasSize;
-  // Support modern ResizeObserver and slow getBoundingClientRect version for improved browser support (matters for TinyPatch)
+  // Support modern ResizeObserver and slow getBoundingClientRect version for improved browser support (matters for TurboWarp)
   if (window.ResizeObserver) {
     let canvasWidth = width;
     let canvasHeight = height;
