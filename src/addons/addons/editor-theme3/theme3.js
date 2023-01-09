@@ -169,7 +169,7 @@ export default async function ({ addon, console }) {
       colourSecondary = secondaryColor(extensionsCategory);
       colourTertiary = tertiaryColor(extensionsCategory);
     }
-    // TinyPatch Blocks
+    // TurboWarp Blocks
     if (this.type.startsWith("tw_")) {
       colour = primaryColor(twCategory);
       colourSecondary = secondaryColor(twCategory);
