@@ -9,12 +9,12 @@ const SAFE_EXTENSION_SITES = [
     // Extensions that start with these URLs will be loaded automatically and without a sandbox.
     // Be careful adding entries to this list.
     // Each entry MUST have a trailing / after the domain for this to provide any security.
-    'https://extensions.TinyPatch.org/',
+    'https://extensions.turbowarp.org/',
 
     // For development.
     'http://localhost:8000/',
 
-    'https://extensions.tinypatch.ml',
+    'https://extensions.tinypatch.ml'
 ];
 
 class TWSecurityManagerComponent extends React.Component {
