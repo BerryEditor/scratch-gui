@@ -393,7 +393,7 @@ export default [
     {
         name: (
             <FormattedMessage
-                defaultMessage="TurboWarp Extension Gallery"
+                defaultMessage="TinyPatch Extension Gallery"
                 description="Name of extensions.turbowarp.org in extension library"
                 id="tw.extensionGallery.name"
             />
