@@ -18,13 +18,13 @@
     "test:smoke": "jest --runInBand test[\\\\/]smoke",
     "watch": "webpack --colors --watch"
   },
-  "author": "Massachusetts Institute of Technology",
+  "author": "Abderrahmene Merzoug",
   "license": "GPL-3.0",
   "private": true,
-  "homepage": "https://github.com/LLK/scratch-gui#readme",
+  "homepage": "https://github.com/TinyPatch/scratch-gui#readme",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/LLK/scratch-gui.git"
+    "url": "git+ssh://git@github.com/TinyPatch/scratch-gui.git"
   },
   "dependencies": {
     "arraybuffer-loader": "^1.0.6",

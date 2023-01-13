@@ -28,7 +28,7 @@ const messages = defineMessages({
     }
 });
 
-const LearnMore = props => (
+/* const LearnMore = props => (
     <React.Fragment>
         {' '}
         <DocumentationLink {...props}>
@@ -38,7 +38,7 @@ const LearnMore = props => (
             />
         </DocumentationLink>
     </React.Fragment>
-);
+); */
 
 class UnwrappedSetting extends React.Component {
     constructor (props) {
@@ -72,18 +72,18 @@ class UnwrappedSetting extends React.Component {
             >
                 <div className={styles.label}>
                     {this.props.primary}
-                    <button
+                    {/* <button
                         className={styles.helpIcon}
                         onClick={this.handleClickHelp}
                         title={this.props.intl.formatMessage(messages.help)}
-                    />
+                    /> */}
                 </div>
-                {this.state.helpVisible && (
+                {/* {this.state.helpVisible && (
                     <div className={styles.detail}>
                         {this.props.help}
                         {this.props.slug && <LearnMore slug={this.props.slug} />}
                     </div>
-                )}
+                )} */}
                 {this.props.secondary}
             </div>
         );
@@ -362,7 +362,6 @@ const CustomStageSize = ({
                         description="Warning about using stages that are too large in settings modal"
                         id="tw.settingsModal.largeStageWarning"
                     />
-                    <LearnMore slug="custom-stage-size" />
                 </div>
             )
         }
