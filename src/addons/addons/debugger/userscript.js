@@ -108,7 +108,7 @@ export default async function ({ addon, console, msg }) {
   compilerWarning.addEventListener("click", () => {
     addon.tab.redux.dispatch({
       type: "scratch-gui/modals/OPEN_MODAL",
-      modal: "settingsModal"
+      modal: "settingsModal",
     });
   });
   compilerWarning.className = "sa-debugger-log sa-debugger-compiler-warning";

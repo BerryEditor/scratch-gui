@@ -63,7 +63,7 @@ export default async function createThreadsTab({ debug, addon, console, msg }) {
     }
 
     if (row.type === "compiled") {
-      const el = document.createElement('div');
+      const el = document.createElement("div");
       el.className = "sa-debugger-thread-compiled";
       el.textContent = "Compiled threads can't be stepped and have no stack information.";
       root.appendChild(el);
@@ -120,10 +120,12 @@ export default async function createThreadsTab({ debug, addon, console, msg }) {
             targetName: target.getName(),
             id,
           },
-          compiledItem: thread.isCompiled ? {
-            type: "compiled",
-            depth: 1,
-          } : null,
+          compiledItem: thread.isCompiled
+            ? {
+                type: "compiled",
+                depth: 1,
+              }
+            : null,
           blockCache: new WeakMap(),
         });
       }
@@ -153,12 +155,9 @@ export default async function createThreadsTab({ debug, addon, console, msg }) {
         }
 
         blockInfo.running =
-          thread === runningThread && (
-            thread.isCompiled || (
-              blockId === runningThread.peekStack() &&
-              stackFrameIdx === runningThread.stackFrames.length - 1
-            )
-          );
+          thread === runningThread &&
+          (thread.isCompiled ||
+            (blockId === runningThread.peekStack() && stackFrameIdx === runningThread.stackFrames.length - 1));
 
         const result = [blockInfo];
         if (stackFrame && stackFrame.executionContext && stackFrame.executionContext.startedThreads) {

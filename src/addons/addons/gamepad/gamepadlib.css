@@ -42,7 +42,7 @@
   background: yellow;
 }
 [theme="dark"] .gamepadlib-mapping[data-value="1"] .gamepadlib-keyinput {
-  background: hsl(60, 100%, 20%)
+  background: hsl(60, 100%, 20%);
 }
 .gamepadlib-keyinput[data-accepting-input="true"] {
   background: #d6fff9;
