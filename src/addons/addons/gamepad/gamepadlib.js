@@ -766,7 +766,7 @@ class GamepadEditor extends EventTarget {
       return key.toUpperCase();
     }
     // Convert eg. "PageUp" -> "Page Up"
-    return key.replace(/[a-z]([A-Z])/, (n) => `${n[0]} ${n[1]}`)
+    return key.replace(/[a-z]([A-Z])/, (n) => `${n[0]} ${n[1]}`);
   }
 
   createButtonMapping(mappingList, index, { property = "high", allowClick = true } = {}) {

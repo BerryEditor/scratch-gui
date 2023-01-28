@@ -5,11 +5,11 @@
 export default async function ({ addon, console }) {
   const vm = addon.tab.traps.vm;
   const updateStageSize = () => {
-    document.documentElement.style.setProperty('--sa-fullscreen-width', vm.runtime.stageWidth);
-    document.documentElement.style.setProperty('--sa-fullscreen-height', vm.runtime.stageHeight);
+    document.documentElement.style.setProperty("--sa-fullscreen-width", vm.runtime.stageWidth);
+    document.documentElement.style.setProperty("--sa-fullscreen-height", vm.runtime.stageHeight);
   };
   updateStageSize();
-  vm.on('STAGE_SIZE_CHANGED', updateStageSize);
+  vm.on("STAGE_SIZE_CHANGED", updateStageSize);
 
   // "Browser fullscreen" is defined as the mode that hides the browser UI.
   function updateBrowserFullscreen() {

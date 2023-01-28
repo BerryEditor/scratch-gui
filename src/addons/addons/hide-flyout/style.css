@@ -97,7 +97,7 @@
   filter: brightness(200%);
 }
 
-.sa-hide-flyout-not-fullscreen [class*="gui_body-wrapper_" ] [class*="gui_stage-and-target-wrapper"] {
+.sa-hide-flyout-not-fullscreen [class*="gui_body-wrapper_"] [class*="gui_stage-and-target-wrapper"] {
   position: relative;
   /* We need to be above these to hide the flyout while dragging blocks: */
   /* .blocklyFlyout (z-index: 20) */

@@ -8,7 +8,7 @@ const extensionsCategory = {
 const twCategory = {
   id: null,
   settingId: "tw-color",
-  colorId: "tw"
+  colorId: "tw",
 };
 const saCategory = {
   settingId: "sa-color",
@@ -82,7 +82,7 @@ export default async function ({ addon, console }) {
   originalColors.tw = {
     primary: "#ff4c4c",
     secondary: "#e64444",
-    tertiary: "#e64444"
+    tertiary: "#e64444",
   };
 
   let textMode = addon.settings.get("text");
