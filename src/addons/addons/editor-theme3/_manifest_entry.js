@@ -45,7 +45,7 @@ const manifest = {
       }
     },
     {
-      "name": "inputColor-forumText",
+      "name": "inputColor-blackText",
       "value": {
         "type": "alphaThreshold",
         "source": {
@@ -237,7 +237,7 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "TinyPatch",
+      "name": "TurboWarp",
       "id": "tw-color",
       "type": "color",
       "default": "#ff4c4c",
