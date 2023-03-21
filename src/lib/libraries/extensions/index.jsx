@@ -350,7 +350,7 @@ export default [
                 id="tp.extensionGallery.name"
             />
         ),
-        href: 'https://extensions.turbowarp.org/',
+        href: 'https://extensions.tinypatch.ml/',
         extensionId: '',
         iconURL: galleryIcon,
         description: (
@@ -368,19 +368,19 @@ export default [
     {
         name: (
             <FormattedMessage
-                defaultMessage="TurboWarp Extension Gallery"
-                description="Name of extensions.turbowarp.org in extension library"
+                defaultMessage="TinyPatch Extension Gallery"
+                description="Name of extension library"
                 id="tw.extensionGallery.name"
             />
         ),
-        href: 'https://extensions.turbowarp.org/',
+        href: 'https://extensions.tinypatch.ml/',
         extensionId: '',
         iconURL: galleryIcon,
         description: (
             <FormattedMessage
                 // eslint-disable-next-line max-len
-                defaultMessage="We list many extensions here for convenience. You can find even more on extensions.turbowarp.org."
-                description="Description of extensions.turbowarp.org in extension library"
+                defaultMessage="We list many extensions here for convenience."
+                description="Description of extension library"
                 id="tw.extensionGallery.description"
             />
         ),
@@ -413,7 +413,7 @@ export default [
     {
         name: 'Stretch',
         extensionId: 'stretch',
-        extensionURL: 'https://extensions.turbowarp.org/stretch.js',
+        extensionURL: 'https://extensions.tinypatch.ml/stretch.js',
         iconURL: stretchIcon,
         description: 'Stretch sprites horizontally or vertically.',
         tags: ['tw'],
@@ -423,7 +423,7 @@ export default [
     {
         name: 'Gamepad',
         extensionId: 'Gamepad',
-        extensionURL: 'https://extensions.turbowarp.org/gamepad.js',
+        extensionURL: 'https://extensions.tinypatch.ml/gamepad.js',
         iconURL: gamepadIcon,
         description: 'Directly access gamepads instead of just mapping buttons to keys.',
         tags: ['tw'],
@@ -433,7 +433,7 @@ export default [
     {
         name: 'Mouse Cursor',
         extensionId: 'MouseCursor',
-        extensionURL: 'https://extensions.turbowarp.org/cursor.js',
+        extensionURL: 'https://extensions.tinypatch.ml/cursor.js',
         iconURL: cursorIcon,
         description: 'Use custom cursors or hide the cursor. Also allows replacing the cursor with any costume image.',
         tags: ['tw'],
@@ -443,7 +443,7 @@ export default [
     {
         name: 'Files',
         extensionId: 'files',
-        extensionURL: 'https://extensions.turbowarp.org/files.js',
+        extensionURL: 'https://extensions.tinypatch.ml/files.js',
         iconURL: fileIcon,
         description: 'Read and download files.',
         tags: ['tw'],
@@ -453,7 +453,7 @@ export default [
     {
         name: 'Pointerlock',
         extensionId: 'pointerlock',
-        extensionURL: 'https://extensions.turbowarp.org/pointerlock.js',
+        extensionURL: 'https://extensions.tinypatch.ml/pointerlock.js',
         iconURL: pointerlockIcon,
         // eslint-disable-next-line max-len
         description: 'Adds blocks for mouse locking. Mouse x & y blocks will report the change since the previous frame while the pointer is locked.',
@@ -464,7 +464,7 @@ export default [
     {
         name: 'Runtime Options',
         extensionId: 'runtimeoptions',
-        extensionURL: 'https://extensions.turbowarp.org/runtime-options.js',
+        extensionURL: 'https://extensions.tinypatch.ml/runtime-options.js',
         iconURL: runtimeOptionsIcon,
         description: 'Get and modify turbo mode, framerate, interpolation, clone limit, stage size, and more.',
         tags: ['tw'],
@@ -474,7 +474,7 @@ export default [
     {
         name: 'Utilities',
         extensionId: 'utilities',
-        extensionURL: 'https://extensions.turbowarp.org/utilities.js',
+        extensionURL: 'https://extensions.tinypatch.ml/utilities.js',
         iconURL: utilitiesIcon,
         description: 'A bunch of interesting blocks. Originally created by Sheep_maker.',
         tags: ['tw'],
