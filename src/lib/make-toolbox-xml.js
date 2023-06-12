@@ -787,7 +787,7 @@ const myBlocks = function () {
 };
 
 // eslint-disable-next-line max-len
-const extraTurboWarpBlocks = `
+const extraTinyPatchBlocks = `
 <block type="argument_reporter_boolean"><field name="VALUE">is compiled?</field></block>
 <block type="argument_reporter_boolean"><field name="VALUE">is TinyPatch?</field></block>
 `;
@@ -861,13 +861,13 @@ const makeToolboxXML = function (
     const myBlocksXML =
         moveCategory("procedures") ||
         myBlocks(isInitialSetup, isStage, targetId);
-    // Always display TurboWarp blocks as the first extension, if it exists,
+    // Always display TinyPatch blocks as the first extension, if it exists,
     // and also add an "is compiled?" block to the top.
     let turbowarpXML = moveCategory("tw");
-    if (turbowarpXML && !turbowarpXML.includes(extraTurboWarpBlocks)) {
+    if (turbowarpXML && !turbowarpXML.includes(extraTinyPatchBlocks)) {
         turbowarpXML = turbowarpXML.replace(
             "<block",
-            `${extraTurboWarpBlocks}<block`
+            `${extraTinyPatchBlocks}<block`
         );
     }
 
