@@ -237,7 +237,7 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "TurboWarp",
+      "name": "TinyPatch",
       "id": "tw-color",
       "type": "color",
       "default": "#ff4c4c",
