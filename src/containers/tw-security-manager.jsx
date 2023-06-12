@@ -7,6 +7,15 @@ import SecurityManagerModal from '../components/tw-security-manager-modal/securi
 import SecurityModals from '../lib/tw-security-manager-constants';
 
 /**
+ * Set of extension URLs that the user has manually trusted to load unsandboxed.
+ */
+const extensionsTrustedByUser = new Set();
+
+const manuallyTrustExtension = url => {
+    extensionsTrustedByUser.add(url);
+};
+
+/**
  * Trusted extensions are loaded automatically and without a sandbox.
  * @param {string} url URL as a string.
  * @returns {boolean} True if the extension can is trusted
@@ -17,7 +26,9 @@ const isTrustedExtension = url => (
 
     // For development.
     url.startsWith('http://localhost:8000/') ||
-    url.startsWith('https://extensions.tinypatch.ml/')
+    url.startsWith('https://extensions.tinypatch.ml/') ||
+
+    extensionsTrustedByUser.has(url)
 );
 
 /**
@@ -66,7 +77,10 @@ const isAlwaysTrustedForFetching = parsed => (
     parsed.origin === 'https://api.gamejolt.com' ||
 
     // httpbin
-    parsed.origin === 'https://httpbin.org'
+    parsed.origin === 'https://httpbin.org' ||
+
+    // ScratchDB
+    parsed.origin === 'https://scratchdb.lefty.one'
 );
 
 /**
@@ -87,32 +101,46 @@ const parseURL = url => {
     return parsed;
 };
 
+let allowedAudio = false;
+let allowedVideo = false;
+let allowedReadClipboard = false;
+let allowedNotify = false;
+
+const SECURITY_MANAGER_METHODS = [
+    'getSandboxMode',
+    'canLoadExtensionFromProject',
+    'canFetch',
+    'canOpenWindow',
+    'canRedirect',
+    'canRecordAudio',
+    'canRecordVideo',
+    'canReadClipboard',
+    'canNotify'
+];
+
 class TWSecurityManagerComponent extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'getSandboxMode',
-            'canLoadExtensionFromProject',
-            'canFetch',
-            'canOpenWindow',
-            'canRedirect',
             'handleAllowed',
             'handleDenied'
         ]);
+        bindAll(this, SECURITY_MANAGER_METHODS);
         this.nextModalCallbacks = [];
         this.modalLocked = false;
         this.state = {
-            modal: null
+            type: null,
+            data: null,
+            callback: null,
+            modalCount: 0
         };
     }
 
     componentDidMount () {
         const securityManager = this.props.vm.extensionManager.securityManager;
-        securityManager.getSandboxMode = this.getSandboxMode;
-        securityManager.canLoadExtensionFromProject = this.canLoadExtensionFromProject;
-        securityManager.canFetch = this.canFetch;
-        securityManager.canOpenWindow = this.canOpenWindow;
-        securityManager.canRedirect = this.canRedirect;
+        for (const method of SECURITY_MANAGER_METHODS) {
+            securityManager[method] = this[method];
+        }
     }
 
     // eslint-disable-next-line valid-jsdoc
@@ -141,19 +169,20 @@ class TWSecurityManagerComponent extends React.Component {
             } else {
                 this.modalLocked = false;
                 this.setState({
-                    modal: null
+                    // only clear type in case other data needs to be accessed
+                    type: null
                 });
             }
         };
 
-        const showModal = async data => {
+        const showModal = async (type, data) => {
             const result = await new Promise(resolve => {
-                this.setState({
-                    modal: {
-                        ...data,
-                        callback: resolve
-                    }
-                });
+                this.setState(oldState => ({
+                    type,
+                    data,
+                    callback: resolve,
+                    modalCount: oldState.modalCount + 1
+                }));
             });
             releaseLock();
             return result;
@@ -166,11 +195,11 @@ class TWSecurityManagerComponent extends React.Component {
     }
 
     handleAllowed () {
-        this.state.modal.callback(true);
+        this.state.callback(true);
     }
 
     handleDenied () {
-        this.state.modal.callback(false);
+        this.state.callback(false);
     }
 
     /**
@@ -185,6 +214,16 @@ class TWSecurityManagerComponent extends React.Component {
         return 'iframe';
     }
 
+    handleChangeUnsandboxed (e) {
+        const checked = e.target.checked;
+        this.setState(oldState => ({
+            data: {
+                ...oldState.data,
+                unsandboxed: checked
+            }
+        }));
+    }
+
     /**
      * @param {string} url The extension's URL
      * @returns {Promise<boolean>} Whether the extension can be loaded
@@ -195,9 +234,20 @@ class TWSecurityManagerComponent extends React.Component {
             return true;
         }
         const {showModal} = await this.acquireModalLock();
-        return showModal({
-            type: SecurityModals.LoadExtension,
-            url
+        if (url.startsWith('data:')) {
+            const allowed = await showModal(SecurityModals.LoadExtension, {
+                url,
+                unsandboxed: false,
+                onChangeUnsandboxed: this.handleChangeUnsandboxed.bind(this)
+            });
+            if (this.state.data.unsandboxed) {
+                manuallyTrustExtension(url);
+            }
+            return allowed;
+        }
+        return showModal(SecurityModals.LoadExtension, {
+            url,
+            unsandboxed: false
         });
     }
 
@@ -218,8 +268,7 @@ class TWSecurityManagerComponent extends React.Component {
             releaseLock();
             return true;
         }
-        const allowed = await showModal({
-            type: SecurityModals.Fetch,
+        const allowed = await showModal(SecurityModals.Fetch, {
             url
         });
         if (allowed) {
@@ -238,8 +287,7 @@ class TWSecurityManagerComponent extends React.Component {
             return false;
         }
         const {showModal} = await this.acquireModalLock();
-        return showModal({
-            type: SecurityModals.OpenWindow,
+        return showModal(SecurityModals.OpenWindow, {
             url
         });
     }
@@ -254,21 +302,64 @@ class TWSecurityManagerComponent extends React.Component {
             return false;
         }
         const {showModal} = await this.acquireModalLock();
-        return showModal({
-            type: SecurityModals.Redirect,
+        return showModal(SecurityModals.Redirect, {
             url
         });
     }
 
+    /**
+     * @returns {Promise<boolean>} True if audio can be recorded
+     */
+    async canRecordAudio () {
+        if (!allowedAudio) {
+            const {showModal} = await this.acquireModalLock();
+            allowedAudio = await showModal(SecurityModals.RecordAudio);
+        }
+        return allowedAudio;
+    }
+
+    /**
+     * @returns {Promise<boolean>} True if video can be recorded
+     */
+    async canRecordVideo () {
+        if (!allowedVideo) {
+            const {showModal} = await this.acquireModalLock();
+            allowedVideo = await showModal(SecurityModals.RecordVideo);
+        }
+        return allowedVideo;
+    }
+
+    /**
+     * @returns {Promise<boolean>} True if the clipboard can be read
+     */
+    async canReadClipboard () {
+        if (!allowedReadClipboard) {
+            const {showModal} = await this.acquireModalLock();
+            allowedReadClipboard = await showModal(SecurityModals.ReadClipboard);
+        }
+        return allowedReadClipboard;
+    }
+
+    /**
+     * @returns {Promise<boolean>} True if the notifications are allowed
+     */
+    async canNotify () {
+        if (!allowedNotify) {
+            const {showModal} = await this.acquireModalLock();
+            allowedNotify = await showModal(SecurityModals.Notify);
+        }
+        return allowedNotify;
+    }
+
     render () {
-        if (this.state.modal) {
-            const modal = this.state.modal;
+        if (this.state.type) {
             return (
                 <SecurityManagerModal
-                    type={modal.type}
-                    url={modal.url}
+                    type={this.state.type}
+                    data={this.state.data}
                     onAllowed={this.handleAllowed}
                     onDenied={this.handleDenied}
+                    key={this.state.modalCount}
                 />
             );
         }
@@ -279,13 +370,12 @@ class TWSecurityManagerComponent extends React.Component {
 TWSecurityManagerComponent.propTypes = {
     vm: PropTypes.shape({
         extensionManager: PropTypes.shape({
-            securityManager: PropTypes.shape({
-                getSandboxMode: PropTypes.func.isRequired,
-                canLoadExtensionFromProject: PropTypes.func.isRequired,
-                canFetch: PropTypes.func.isRequired,
-                canOpenWindow: PropTypes.func.isRequired,
-                canRedirect: PropTypes.func.isRequired
-            }).isRequired
+            securityManager: PropTypes.shape(
+                SECURITY_MANAGER_METHODS.reduce((obj, method) => {
+                    obj[method] = PropTypes.func.isRequired;
+                    return obj;
+                }, {})
+            ).isRequired
         }).isRequired
     }).isRequired
 };
@@ -296,7 +386,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = () => ({});
 
-export default connect(
+const ConnectedSecurityManagerComponent = connect(
     mapStateToProps,
     mapDispatchToProps
 )(TWSecurityManagerComponent);
+
+export {
+    ConnectedSecurityManagerComponent as default,
+    manuallyTrustExtension,
+    isTrustedExtension
+};
